@@ -3,7 +3,7 @@
 import React from 'react';
 import { Dimensions } from 'react-native';
 
-function setScreenSize(){
+export function getScreenSize(){
   const SCREEN_WIDTH = Dimensions.get('window').width;
   const IPAD_WIDTH = 768;
   const IPAD_PRO_WIDTH = 1024;
@@ -19,4 +19,4 @@ function setScreenSize(){
   }
 }
 
-export const screenSize = setScreenSize();
+export const screenSize = getScreenSize();

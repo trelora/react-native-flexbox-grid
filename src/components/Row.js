@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {screenSize} from '../lib/ScreenSize';
+import {screenSize as staticScreenSize} from '../lib/ScreenSize';
 import {isHidden} from '../lib/helpers';
 import {View} from 'react-native';
 
@@ -12,9 +12,11 @@ const cloneElements = (props) => {
     });
 }
 
-const Row = (props) => {
+const Row = (props, context) => {
+  const screenSize = context && context.hasOwnProperty('screenSize') ? context.screenSize : staticScreenSize;
+
   if(isHidden(screenSize, props)){
-      return null;
+    return null;
     } else {
       return (
         <View {...props}
@@ -37,5 +39,10 @@ Row.propTypes = {
   mdHidden: PropTypes.bool,
   lgHidden: PropTypes.bool,
 };
+
+
+Row.contextTypes = {
+  screenSize: PropTypes.string
+}
 
 export default Row;

@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from 'react';
-import {screenSize} from '../lib/ScreenSize';
+import {screenSize as staticScreenSize} from '../lib/ScreenSize';
 import {isHidden, getComponentWidth, getComponentOffset} from '../lib/helpers';
 import {View} from 'react-native';
 
-const Column = (props) => {
+const Column = (props, context) => {
     const {
       sm,
       smOffset,
@@ -30,6 +30,8 @@ const Column = (props) => {
       lgHidden,
       rowSize
     };
+
+    const screenSize = context && context.hasOwnProperty('screenSize') ? context.screenSize : staticScreenSize;
 
     if(isHidden(screenSize, gridProps)){
       return null;
@@ -60,5 +62,9 @@ Column.propTypes = {
   lgOffset: PropTypes.number,
   lgHidden: PropTypes.bool,
 };
+
+Column.contextTypes = {
+  screenSize: PropTypes.string
+}
 
 export default Column;
